@@ -1,0 +1,1 @@
+cmd /k "setenv.bat & python load_and_test.py prd & deactivate" 
