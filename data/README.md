@@ -37,7 +37,7 @@ to develop.
 
 ```bat
 > set API_KEY=WhyWasThe6ScaredBecause789
-> set ACCOUNT=nycmap
+> set ACCOUNT=cartoaccount12345
 > stg_load_and_test.bat
 ```
 
@@ -50,7 +50,7 @@ Requirements python 3+ with virtualenv and pip.  This one from Windows CMD for m
 
 ```bat
 > set API_KEY=WhyWasThe6ScaredBecause789
-> set ACCOUNT=nycmap
+> set ACCOUNT=cartoaccount12345
 > prd_load_and_test.bat
 ```
 

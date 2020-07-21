@@ -5,7 +5,7 @@ import warnings
 import cartomgr
 
 #set API_KEY=xxxxx
-#set ACCOUNT=nycmap
+#set ACCOUNT=cartoaccount12345
 #cd C:\matt_projects\carto-fn\data>
 #setenv.bat
 #python test_cartomgr.py

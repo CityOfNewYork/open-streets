@@ -153,3 +153,8 @@ scratch/
 *.shx
 *.prj
 *.dbf
+
+#specific outputs from testing and data work 
+data/open_street_next.cpg
+data/open_street_next.sql
+data/openstreets.geojson

@@ -136,11 +136,11 @@ def load_prd(cartoclient
 
     if cartoclient.batchsql(list_of_sqls):
     
-        kount_next = cartoclient.getkount('open_street_live')
+        kount_live = cartoclient.getkount('open_street_live')
     
-        if kount_next > 0:
+        if kount_live > 0:
         
-            logger.info("successfully inserted {0} records into {1}".format(kount_upload, 'open_street_live'))
+            logger.info("successfully inserted {0} records into {1}".format(kount_live, 'open_street_live'))
 
         else:
 
@@ -158,8 +158,8 @@ def test_stg_vs_prd(logger):
     # TODO organize this mess
 
     # real segment open street
-    response_stg = json.loads(requests.get("https://nycmap.carto.com/api/v2/sql?q=SELECT%20*%20from%20open_street_segment_test(%270164354%27)").text)
-    response_prd = json.loads(requests.get("https://nycmap.carto.com/api/v2/sql?q=SELECT%20*%20from%20open_street_segment(%270164354%27)").text)
+    response_stg = json.loads(requests.get("https://{0}.carto.com/api/v2/sql?q=SELECT%20*%20from%20open_street_segment_test(%270164354%27)".format(os.environ['ACCOUNT'])).text)
+    response_prd = json.loads(requests.get("https://{0}.carto.com/api/v2/sql?q=SELECT%20*%20from%20open_street_segment(%270164354%27)".format(os.environ['ACCOUNT'])).text)
 
     if response_stg["total_rows"] == response_prd["total_rows"]:
         logger.info(".OK")
@@ -168,8 +168,8 @@ def test_stg_vs_prd(logger):
 
     # segment 1 is nothing, 0 rows
 
-    response_stg = json.loads(requests.get("https://nycmap.carto.com/api/v2/sql?q=SELECT%20*%20from%20open_street_segment_test(%270000001%27)").text)
-    response_prd = json.loads(requests.get("https://nycmap.carto.com/api/v2/sql?q=SELECT%20*%20from%20open_street_segment(%270000001%27)").text)
+    response_stg = json.loads(requests.get("https://{0}.carto.com/api/v2/sql?q=SELECT%20*%20from%20open_street_segment_test(%270000001%27)".format(os.environ['ACCOUNT'])).text)
+    response_prd = json.loads(requests.get("https://{0}.carto.com/api/v2/sql?q=SELECT%20*%20from%20open_street_segment(%270000001%27)".format(os.environ['ACCOUNT'])).text)
 
     if response_stg["total_rows"] == response_prd["total_rows"]:
         logger.info(".OK")
@@ -177,8 +177,8 @@ def test_stg_vs_prd(logger):
         logger.info("FAIL open_street_segment_test(0000001)")
 
     #real node 0020769
-    response_stg = json.loads(requests.get("https://nycmap.carto.com/api/v2/sql?q=SELECT%20*%20from%20open_street_node_test(%270020769%27)").text)
-    response_prd = json.loads(requests.get("https://nycmap.carto.com/api/v2/sql?q=SELECT%20*%20from%20open_street_node(%270020769%27)").text)
+    response_stg = json.loads(requests.get("https://{0}.carto.com/api/v2/sql?q=SELECT%20*%20from%20open_street_node_test(%270020769%27)".format(os.environ['ACCOUNT'])).text)
+    response_prd = json.loads(requests.get("https://{0}.carto.com/api/v2/sql?q=SELECT%20*%20from%20open_street_node(%270020769%27)".format(os.environ['ACCOUNT'])).text)
 
     if response_stg["total_rows"] == response_prd["total_rows"]:
         logger.info(".OK")
@@ -186,8 +186,8 @@ def test_stg_vs_prd(logger):
         logger.info("FAIL open_street_node_test(0020769)")
 
     #radius from x,y
-    response_stg = json.loads(requests.get("https://nycmap.carto.com/api/v2/sql?q=SELECT%20*%20from%20open_street_radius_test(987296,201152,100)").text)
-    response_prd = json.loads(requests.get("https://nycmap.carto.com/api/v2/sql?q=SELECT%20*%20from%20open_street_radius(987296,201152,100)").text)
+    response_stg = json.loads(requests.get("https://{0}.carto.com/api/v2/sql?q=SELECT%20*%20from%20open_street_radius_test(987296,201152,100)".format(os.environ['ACCOUNT'])).text)
+    response_prd = json.loads(requests.get("https://{0}.carto.com/api/v2/sql?q=SELECT%20*%20from%20open_street_radius(987296,201152,100)".format(os.environ['ACCOUNT'])).text)
 
     if response_stg["total_rows"] == response_prd["total_rows"]:
         logger.info(".OK")
@@ -215,12 +215,12 @@ def main(prd_or_stg):
 
     elif prd_or_stg == 'prd':
 
-        logger.info("manually execute refresh_live_from_next.sql here")
-        logger.info("this step is commented in the code until I have seen it through once")
-        logger.info("tests will still run however....")
+        #logger.info("manually execute refresh_live_from_next.sql here")
+        #logger.info("this step is commented in the code until I have seen it through once")
+        #logger.info("tests will still run however....")
 
-        #load_prd(karto_klient
-        #        ,logger)
+        load_prd(karto_klient
+                ,logger)
 
 
     test_stg_vs_prd(logger)

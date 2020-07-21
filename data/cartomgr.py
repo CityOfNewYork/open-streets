@@ -41,7 +41,7 @@ class client(object):
         except CartoException as e:
             print("some error occurred", e)
             #occasional:
-            #HTTPSConnectionPool(host='nycmap.carto.com', port=443): Max retries exceeded with url: /api/v2/sql?q=SELECT...
+            #HTTPSConnectionPool(host='xxxxx.carto.com', port=443): Max retries exceeded with url: /api/v2/sql?q=SELECT...
             #(Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 407 Proxy Authentication Required')))
             return False
 
@@ -94,7 +94,7 @@ class client(object):
 
         # job looks like
         # {
-        #  'user': 'nycmap', 
+        #  'user': 'xxxx', 
         #  'status': 'done', 
         #  'query': [{'query': 'drop table if exists foo', 'status': 'done'}, 
         #            {'query': 'create table foo (bar text)', 'status': 'done'}, 
